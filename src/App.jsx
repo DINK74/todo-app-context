@@ -20,7 +20,6 @@ const initialTodos = [
 ];
 
 const filterReducer = (state, action) => {
-	console.log(state, action.type);
 	switch (action.type) {
 		case "SHOW_ALL":
 			return "ALL";
