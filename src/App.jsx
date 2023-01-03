@@ -35,21 +35,9 @@ const filterReducer = (state, action) => {
 const todoReducer = (state, action) => {
 	switch (action.type) {
 		case "DO_TODO":
-			return state.map((todo) => {
-				if (todo.id === action.id) {
-					return { ...todo, complete: true };
-				} else {
-					return todo;
-				}
-			});
+			return state.map((todo) => (todo.id === action.id ? { ...todo, complete: true } : todo));
 		case "UNDO_TODO":
-			return state.map((todo) => {
-				if (todo.id === action.id) {
-					return { ...todo, complete: false };
-				} else {
-					return todo;
-				}
-			});
+			return state.map((todo) => (todo.id === action.id ? { ...todo, complete: false } : todo));
 		case "ADD_TODO":
 			return state.concat({
 				task: action.task,
@@ -66,7 +54,7 @@ function App() {
 	const [task, setTask] = useState("");
 	const [filter, dispatchFilter] = useReducer(filterReducer, filterReducer(null, { type: "SHOW_ALL" }) /* ALL */);
 
-	/* dispatchFilter(action) calls filterReducer(filter, action) and assigns return value to filter */
+	/* dispatchFilter(action) calls filterReducer(filter, action) and assigns return value to filter state */
 
 	const filteredTodos = todos.filter((todo) => {
 		if (filter === "ALL") {
