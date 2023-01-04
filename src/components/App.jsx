@@ -27,7 +27,6 @@ const initialTodos = [
 
 function App() {
 	const [todos, dispatchTodos] = useReducer(todoReducer, initialTodos);
-	const [task, setTask] = useState("");
 	const [filter, dispatchFilter] = useReducer(filterReducer, filterReducer(null, { type: "SHOW_ALL" }) /* ALL */);
 
 	/* dispatchFilter(action) calls filterReducer(filter, action) and assigns return value to filter state */
