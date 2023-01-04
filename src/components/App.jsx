@@ -1,6 +1,6 @@
 import { useState, useReducer, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { TodoContext } from "./contexts/context";
+import { TodoContext } from "./contexts/TodoContext";
 import filterReducer from "./reducers/filterReducer";
 import todoReducer from "./reducers/todoReducer";
 import TodoList from "./TodoList";

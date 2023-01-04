@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState, useContext } from "react";
-import { TodoContext } from "./contexts/context";
+import { TodoContext } from "./contexts/TodoContext";
 
 export default function AddTodo() {
 	const dispatch = useContext(TodoContext);
