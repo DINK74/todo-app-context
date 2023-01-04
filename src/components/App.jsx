@@ -6,6 +6,7 @@ import todoReducer from "./reducers/todoReducer";
 import TodoList from "./TodoList";
 import AddTodo from "./AddTodo";
 import Filter from "./Filter";
+import Status from "./Status";
 
 const initialTodos = [
 	{
@@ -53,6 +54,7 @@ function App() {
 				<Filter dispatch={dispatchFilter} />
 				<TodoList todos={filteredTodos} />
 				<AddTodo />
+				<Status todos={todos}/>
 			</TodoContext.Provider>
 		</div>
 	);
