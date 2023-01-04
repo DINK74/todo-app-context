@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { useState, useContext } from "react";
 import { TodoContext } from "./contexts/context";
 
@@ -6,9 +7,7 @@ export default function AddTodo() {
 	const [task, setTask] = useState("");
 
 	const handleSubmit = (event) => {
-		console.log("handleSubmit");
 		if (task) {
-			console.log("task", task);
 			dispatch({ type: "ADD_TODO", task, id: uuidv4() });
 		}
 
