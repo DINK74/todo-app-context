@@ -6,7 +6,9 @@ export default function AddTodo() {
 	const [task, setTask] = useState("");
 
 	const handleSubmit = (event) => {
+		console.log("handleSubmit");
 		if (task) {
+			console.log("task", task);
 			dispatch({ type: "ADD_TODO", task, id: uuidv4() });
 		}
 

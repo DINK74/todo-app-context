@@ -1,10 +1,10 @@
-import { useState, useReducer } from "react";
+import { useState, useReducer, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TodoContext } from "./contexts/context";
 import filterReducer from "./reducers/filterReducer";
 import todoReducer from "./reducers/todoReducer";
 import TodoList from "./TodoList";
-import AddTodo from "./AddTodo";
+// import AddTodo from "./AddTodo";
 import Filter from "./Filter";
 
 const initialTodos = [
@@ -24,6 +24,30 @@ const initialTodos = [
 		complete: false,
 	},
 ];
+
+const AddTodo = () => {
+	const dispatch = useContext(TodoContext);
+	const [task, setTask] = useState("");
+
+	const handleSubmit = (event) => {
+		if (task) {
+			dispatch({ type: "ADD_TODO", task, id: uuidv4() });
+		}
+
+		setTask("");
+
+		event.preventDefault();
+	};
+
+	const handleChange = (event) => setTask(event.target.value);
+
+	return (
+		<form onSubmit={handleSubmit}>
+			<input type="text" value={task} onChange={handleChange} />
+			<button type="submit">Add Todo</button>
+		</form>
+	);
+};
 
 function App() {
 	const [todos, dispatchTodos] = useReducer(todoReducer, initialTodos);
@@ -47,39 +71,6 @@ function App() {
 
 		return false;
 	});
-
-	const handleChangeInput = (event) => {
-		setTask(event.target.value);
-	};
-
-	const handleShowAll = () => {
-		dispatchFilter({ type: "SHOW_ALL" });
-	};
-
-	const handleShowComplete = () => {
-		dispatchFilter({ type: "SHOW_COMPLETE" });
-	};
-
-	const handleShowIncomplete = () => {
-		dispatchFilter({ type: "SHOW_INCOMPLETE" });
-	};
-
-	const handleChangeCheckbox = (todo) => {
-		dispatchTodos({
-			type: todo.complete ? "UNDO_TODO" : "DO_TODO",
-			id: todo.id,
-		});
-	};
-
-	const handleSubmit = (event) => {
-		if (task) {
-			dispatchTodos({ type: "ADD_TODO", task, id: uuidv4() });
-		}
-
-		setTask("");
-
-		event.preventDefault();
-	};
 
 	return (
 		<div className="App">
